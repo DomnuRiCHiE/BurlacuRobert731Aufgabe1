@@ -2,10 +2,11 @@ package Controller;
 
 import Model.Log;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.io.IOException;
+import java.util.*;
+import java.util.stream.Collectors;
+
+import static Model.FileFunctionalities.writeToFile;
 
 public class Controller {
     private final List<Log> logEntries;
@@ -25,5 +26,18 @@ public class Controller {
         return new ArrayList<>(uniquePatients); // Converting to List, printStudents needs a List parameter
     }
 
+    public List<String> getHospitalCases() throws IOException {
+        Map<String, Integer> hospitalLogs = logEntries.stream()
+                .collect(Collectors.groupingBy(
+                        Log::getHospital,
+                        Collectors.summingInt(Log::getId)
+                ));
 
+        List<String> processedHospitals = hospitalLogs.entrySet().stream()
+                .sorted((entry1, entry2) -> entry2.getValue().compareTo(entry1.getValue()))
+                .map(entry -> entry.getKey() + "&" + entry.getValue())
+                .toList();
+
+        return processedHospitals;
+    }
 }
