@@ -3,6 +3,7 @@ package UI;
 import Controller.Controller;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Scanner;
 
 public class UI {
@@ -26,7 +27,7 @@ public class UI {
 
             switch (input) {
                 case "1":
-                    //handleStudentsByLetter();
+                    handlePatientsByLetter();
                     break;
                 case "2":
                     //printStudents(controller.getGryffindorStudents());
@@ -40,6 +41,20 @@ public class UI {
                 default:
                     System.out.println("Invalid option. Please try again.");
             }
+        }
+    }
+
+    private void handlePatientsByLetter() {
+        System.out.print("Enter a capital letter: ");
+        String letter = scanner.nextLine();
+        controller.getPatientsByLetter(letter).forEach(System.out::println);
+    }
+
+    private void printPatients(List<String> logs) {
+        if (logs.isEmpty()) {
+            System.out.println("No students found.");
+        } else {
+            logs.forEach(System.out::println);
         }
     }
 }
