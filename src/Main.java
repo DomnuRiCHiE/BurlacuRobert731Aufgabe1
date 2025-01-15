@@ -9,7 +9,7 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
         try {
-            LogParser parser = LogParserFactory.getParser("txt");
+            LogParser parser = LogParserFactory.getParser("json");
             List<Log> logEntries = parser.parse("fallakten.json");
 
             Controller controller = new Controller(logEntries);
