@@ -35,7 +35,7 @@ public class UI {
                     //printStudents(controller.getGryffindorStudents());
                     break;
                 case "3":
-                    //printHouseResults();
+                    printHospitalCases();
                     break;
                 case "4":
                     System.out.println("Exiting the application. Goodbye!");
